@@ -5,7 +5,13 @@ import HomeScreen from "../screens/HomeScreen";
 import MypageScreen from "../screens/MypageScreen";
 import SearchScreen from "../screens/SearchScreen";
 
-const Tab = createBottomTabNavigator();
+export type BottomTabParamList = {
+  Home: undefined;
+  Search: undefined;
+  Mypage: undefined;
+};
+
+const Tab = createBottomTabNavigator<BottomTabParamList>();
 
 export default function BottomTabNavigator() {
   return (

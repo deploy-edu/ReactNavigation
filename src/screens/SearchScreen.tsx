@@ -23,7 +23,7 @@ function SearchScreen({ navigation }) {
   useEffect(() => {
     async function fetchData() {
       const response = await fetch(
-        `https://newsapi.org/v2/everything?q=${keyword}&from=2024-09-29&sortBy=publishedAt&apiKey=e40c9540da594621a4e0e3349a197c63&language=en`
+        `https://newsapi.org/v2/everything?q=${keyword}&from=2024-09-29&sortBy=publishedAt&apiKey=&language=en`
       );
       const data = await response.json();
       setData(data.articles);
@@ -53,11 +53,17 @@ function SearchScreen({ navigation }) {
       />
       <FlatList
         data={data}
+        onEndReached={() => {
+          console.log("onEndReached");
+        }}
         renderItem={({ item }) => (
           <ListItem
             title={item.title}
             imageUrl={item.urlToImage}
             sourceName={item.source.name}
+            onPress={() => {
+              navigation.navigate("NewsView", { article: item });
+            }}
           />
         )}
         keyExtractor={(item, index) => index.toString()}
